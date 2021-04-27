@@ -31,9 +31,11 @@ public class ApiGatewayApplication {
                         .path("/api/v1/employeeType/**")
                         .uri("lb://EMPLOYEE-SERVICE"))
                 .route(r -> r
-                        .path("/api/v1/orders/**")
+                        .path("/api/v1/order/**")
                         .uri("lb://ORDER-SERVICE"))
-
+                .route(r -> r
+                        .path("/api/v1/table/**")
+                        .uri("lb://ORDER-SERVICE"))
                 .build();
     }
 }
