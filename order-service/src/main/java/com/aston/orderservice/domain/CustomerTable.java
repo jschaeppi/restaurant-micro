@@ -4,6 +4,8 @@ package com.aston.orderservice.domain;
 //CREATED ON: 4/26/21
 //BY: joe
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 import java.util.List;
@@ -18,10 +20,14 @@ public class CustomerTable {
 
     @Version
     private Integer version;
+    private Integer size;
+    private Integer customerCount;
+    private Integer serverId;
 
-
+    private boolean validCount;
     private boolean status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "serverTable")
     private List<TableOrder> orderList;
     //endregion
@@ -37,6 +43,22 @@ public class CustomerTable {
     }
 
     public CustomerTable(boolean status, List<TableOrder> orderList) {
+        this.status = status;
+        this.orderList = orderList;
+    }
+
+    public CustomerTable(Integer customerCount, Integer serverId, boolean validCount, boolean status) {
+        this.customerCount = customerCount;
+        this.serverId = serverId;
+        this.validCount = validCount;
+        this.status = status;
+    }
+
+    public CustomerTable(Integer size, Integer customerCount, Integer serverId, boolean validCount, boolean status, List<TableOrder> orderList) {
+        this.size = size;
+        this.customerCount = customerCount;
+        this.serverId = serverId;
+        this.validCount = validCount;
         this.status = status;
         this.orderList = orderList;
     }
@@ -74,6 +96,38 @@ public class CustomerTable {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+    public Integer getCustomerCount() {
+        return customerCount;
+    }
+
+    public void setCustomerCount(Integer customerCount) {
+        this.customerCount = customerCount;
+    }
+
+    public Integer getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(Integer serverId) {
+        this.serverId = serverId;
+    }
+
+    public boolean isValidCount() {
+        return validCount;
+    }
+
+    public void setValidCount(boolean validCount) {
+        this.validCount = validCount;
     }
 
     //endregion

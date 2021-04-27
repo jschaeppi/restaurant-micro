@@ -36,6 +36,18 @@ public class ApiGatewayApplication {
                 .route(r -> r
                         .path("/api/v1/table/**")
                         .uri("lb://ORDER-SERVICE"))
+                .route(r -> r
+                        .path("/api/v1/ingredient/**")
+                        .uri("lb://ORDER-SERVICE"))
+                .route(r -> r
+                        .path("/api/v1/menuitem/**")
+                        .uri("lb://ORDER-SERVICE"))
+                .route(r -> r
+                        .path("/api/v1/ingredientType/**")
+                        .uri("lb://ORDER-SERVICE"))
+                .route(r -> r
+                        .path("/api/v1/kafka/**")
+                        .uri("lb://KAFKA-PRODUCER"))
                 .build();
     }
 }

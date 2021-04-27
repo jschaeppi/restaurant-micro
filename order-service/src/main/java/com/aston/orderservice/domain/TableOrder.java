@@ -5,8 +5,12 @@ package com.aston.orderservice.domain;
 //BY: joe
 
 import javax.persistence.*;
+import javax.persistence.criteria.Order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.awt.*;
+import java.util.List;
 
 @Entity
 public class TableOrder {
@@ -19,10 +23,16 @@ public class TableOrder {
     @Version
     private Integer version;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_status_id")
+    private List<OrderStatus> orderStatus;
+
+    @ManyToOne
     @JoinColumn(name = "table_id", nullable = false)
     private CustomerTable serverTable;
+
+    @ManyToMany
+    private List<MenuItem> menuItems;
     //endregion
 
     //region Constructors
@@ -59,6 +69,30 @@ public class TableOrder {
 
     public void setTable(CustomerTable table) {
         this.serverTable = table;
+    }
+
+    public CustomerTable getServerTable() {
+        return serverTable;
+    }
+
+    public void setServerTable(CustomerTable serverTable) {
+        this.serverTable = serverTable;
+    }
+
+    public List<OrderStatus> getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(List<OrderStatus> orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public List<MenuItem> getMenuItems() {
+        return menuItems;
+    }
+
+    public void setMenuItems(List<MenuItem> menuItems) {
+        this.menuItems = menuItems;
     }
 
     //endregion
