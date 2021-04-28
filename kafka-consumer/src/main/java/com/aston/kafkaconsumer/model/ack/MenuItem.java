@@ -1,7 +1,7 @@
-package com.aston.orderservice.domain;
+package com.aston.kafkaconsumer.model.ack;
 
 //PROJECT CREATED BY: IntelliJ IDEA
-//CREATED ON: 4/27/21
+//CREATED ON: 4/28/21
 //BY: joe
 
 import javax.persistence.*;

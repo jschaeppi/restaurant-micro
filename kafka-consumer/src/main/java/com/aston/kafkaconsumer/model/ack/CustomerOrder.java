@@ -1,19 +1,18 @@
-package com.aston.orderservice.domain;
+package com.aston.kafkaconsumer.model.ack;
 
 //PROJECT CREATED BY: IntelliJ IDEA
-//CREATED ON: 4/26/21
+//CREATED ON: 4/28/21
 //BY: joe
 
 import javax.persistence.*;
-import javax.persistence.criteria.Order;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.awt.*;
 import java.util.List;
 
 @Entity
-public class TableOrder {
+public class CustomerOrder {
 
     //region PROPERTIES
     @Id
@@ -37,10 +36,10 @@ public class TableOrder {
 
     //region Constructors
 
-    public TableOrder() {
+    public CustomerOrder() {
     }
 
-    public TableOrder(boolean status, CustomerTable table) {
+    public CustomerOrder(boolean status, CustomerTable table) {
         this.serverTable = table;
     }
 
@@ -87,5 +86,5 @@ public class TableOrder {
         this.menuItems = menuItems;
     }
 
-    //endregion
+//endregion
 }

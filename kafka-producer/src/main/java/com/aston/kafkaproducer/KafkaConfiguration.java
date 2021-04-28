@@ -1,6 +1,6 @@
 package com.aston.kafkaproducer;
 
-import com.aston.kafkaproducer.ack.Ingredient;
+import com.aston.kafkaproducer.model.ack.Ingredient;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;

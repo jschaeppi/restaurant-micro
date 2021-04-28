@@ -1,18 +1,19 @@
-package com.aston.orderservice.domain;
+package com.aston.kafkaconsumer.model.ack;
 
 //PROJECT CREATED BY: IntelliJ IDEA
-//CREATED ON: 4/27/21
+//CREATED ON: 4/28/21
 //BY: joe
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 @Entity
-public class MenuItem {
+public class IngredientType {
 
     //region PROPERTIES
     @Id
@@ -21,35 +22,30 @@ public class MenuItem {
 
     @Version
     private Integer version;
-    private Integer price;
 
-    private String name;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ingredient_list_id", nullable = false)
+    private String type;
+    @JsonIgnore
+    @OneToMany(mappedBy = "ingredientType")
     private List<Ingredient> ingredientList;
     //endregion
 
     //region Constructors
 
-    public MenuItem() {
+
+    public IngredientType() {
     }
 
-    public MenuItem(String name) {
-        this.name = name;
+    public IngredientType(String type) {
+        this.type = type;
     }
 
-    public MenuItem(String name, List<Ingredient> ingredientList) {
-        this.name = name;
+    public IngredientType(String type, List<Ingredient> ingredientList) {
+        this.type = type;
         this.ingredientList = ingredientList;
     }
 
-    public MenuItem(Integer price, String name) {
-        this.price = price;
-        this.name = name;
-    }
 
-    //endregion
+//endregion
     //region GETTERS AND SETTERS
 
     public Integer getId() {
@@ -68,12 +64,12 @@ public class MenuItem {
         this.version = version;
     }
 
-    public String getName() {
-        return name;
+    public String getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public List<Ingredient> getIngredientList() {
@@ -83,14 +79,5 @@ public class MenuItem {
     public void setIngredientList(List<Ingredient> ingredientList) {
         this.ingredientList = ingredientList;
     }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
 //endregion
 }
