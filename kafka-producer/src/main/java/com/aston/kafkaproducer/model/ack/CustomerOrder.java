@@ -1,45 +1,27 @@
-package com.aston.orderservice.domain;
+package com.aston.kafkaproducer.model.ack;
 
-//PROJECT CREATED BY: IntelliJ IDEA
-//CREATED ON: 4/26/21
-//BY: joe
-
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.awt.*;
 import java.util.List;
 
-@Entity
-public class TableOrder {
+public class CustomerOrder {
 
     //region PROPERTIES
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Version
     private Integer version;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_status_id")
     private List<OrderStatus> orderStatus;
 
-    @ManyToOne
-    @JoinColumn(name = "table_id", nullable = false)
     private CustomerTable serverTable;
 
-    @ManyToMany(cascade = CascadeType.ALL)
     private List<MenuItem> menuItems;
     //endregion
 
     //region Constructors
 
-    public TableOrder() {
+    public CustomerOrder() {
     }
 
-    public TableOrder(boolean status, CustomerTable table) {
+    public CustomerOrder(boolean status, CustomerTable table) {
         this.serverTable = table;
     }
 
@@ -86,5 +68,5 @@ public class TableOrder {
         this.menuItems = menuItems;
     }
 
-    //endregion
+//endregion
 }

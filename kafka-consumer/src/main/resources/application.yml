@@ -1,6 +1,10 @@
 spring:
   application:
     name: KAFKA-CONSUMER
+  kafka:
+    consumer:
+      properties:
+        spring.json.trusted.packages: "*"
 server:
   port: 8084
 eureka:

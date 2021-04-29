@@ -1,5 +1,6 @@
-package com.aston.kafkaproducer;
+package com.aston.kafkaproducer.configuration;
 
+import com.aston.kafkaproducer.model.ack.CustomerOrder;
 import com.aston.kafkaproducer.model.ack.Ingredient;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -17,7 +18,7 @@ import java.util.Map;
 public class KafkaConfiguration {
 
     @Bean
-    public ProducerFactory<String, Ingredient> producerFactory() {
+    public ProducerFactory<String, Object> producerFactory() {
 
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -27,7 +28,22 @@ public class KafkaConfiguration {
     }
 
     @Bean
-    public KafkaTemplate<String, Ingredient> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
+    public KafkaTemplate<String, Object> kafkaTemplate() {
+        return new KafkaTemplate<String, Object>(producerFactory());
     }
+
+/*    @Bean
+    public ProducerFactory<String, Ingredient> producerFactoryIngredient() {
+
+        Map<String, Object> config = new HashMap<>();
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+        return new DefaultKafkaProducerFactory(config);
+    }
+
+    @Bean
+    public KafkaTemplate<String, Ingredient> kafkaTemplateIngredient() {
+        return new KafkaTemplate<>(producerFactoryIngredient());
+    }*/
 }

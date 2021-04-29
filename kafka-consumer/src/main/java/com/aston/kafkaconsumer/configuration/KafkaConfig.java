@@ -22,7 +22,7 @@ import java.util.Map;
 public class KafkaConfig {
 
     @Bean
-    public ConsumerFactory<String, CustomerOrder> consumerFactory() {
+    public ConsumerFactory<String, Object> consumerFactory() {
         Map<String, Object> config = new HashMap<>();
 
         config.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -30,18 +30,18 @@ public class KafkaConfig {
         config.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         config.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         config.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
-        config.put(JsonDeserializer.VALUE_DEFAULT_TYPE, CustomerOrder.class);
+        config.put(JsonDeserializer.VALUE_DEFAULT_TYPE, Object.class);
         return new DefaultKafkaConsumerFactory<>(config);
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, CustomerOrder> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, CustomerOrder> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, Object> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Object> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());;
         return factory;
     }
 
-    @Bean
+/*    @Bean
     public ConsumerFactory<String, Ingredient> consumerFactoryIngredient() {
         Map<String, Object> config = new HashMap<>();
         System.out.println(KafkaHeaders.RECEIVED);
@@ -59,5 +59,5 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, Ingredient> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactoryIngredient());
         return factory;
-    }
+    }*/
 }

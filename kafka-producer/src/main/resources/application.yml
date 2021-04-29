@@ -1,13 +1,6 @@
 spring:
   application:
     name: KAFKA-PRODUCER
-  kafka:
-    consumer:
-      properties:
-        spring.json.trusted.packages: *
-  json:
-    trusted:
-      packages: *
 server:
   port: 8083
 eureka:

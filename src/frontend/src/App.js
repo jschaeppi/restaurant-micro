@@ -1,11 +1,14 @@
+import { Container } from '@material-ui/core';
 import './App.css';
 import Nav from './components/Nav';
+import { Main } from './pages/Main';
 
 function App() {
   return (
-    <div className="container">
+    <Container fixed>
       <Nav />
-    </div>
+      <Main />
+    </Container>
   );
 }
 
